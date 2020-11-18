@@ -1,4 +1,4 @@
 class bowlinggame():
     def __init__(self):
-        self.rolls = []
+        self.frames = []
         self.score = 0
