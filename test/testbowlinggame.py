@@ -6,36 +6,43 @@ class testbowlinggame(unittest.TestCase):
     def setUp(self):
         self.game = bowlinggame()
 
-    def test_scorezero(self):
-        self.assertEqual(self.game.score ,0)
+    def test_ScoreZero(self):
+        self.assertEqual(self.game.score, 0)
         print(str(self.game.score))
 
-    def test_allgutters(self):
+    def test_CanRecordRollingofBall(self):
+        self.game.roll(1)
+        self.assertEqual(self.game.rolls, [1])
+        self.game.roll(2)
+        self.assertEqual(self.game.rolls, [1, 2])
+        print(str(self.game.score))
+
+    def test_AllGutters(self):
         self.roll_many(0, 20)
-        self.assertEquals(0, self.game.roll_score())
+        self.assertEquals(self.game.roll_score(), 0)
         print(str(self.game.score))
   
-    def test_allones(self):
+    def test_AllOnes(self):
         self.roll_many(1, 20)
-        self.assertEquals(20, self.game.roll_score())
+        self.assertEquals(self.game.roll_score(), 20)
         print(str(self.game.score))
 
-    def test_onesparewiththreerolls(self):
+    def test_OneSparewithThreeRolls(self):
         self.roll_spare()
         self.game.roll(5)
         self.roll_many(0, 17)
-        self.assertEqual(20, self.game.roll_score())
+        self.assertEqual(self.game.roll_score(), 20)
 
-    def test_onestrikewithtworolls(self):
+    def test_OneStrikewithTwoRolls(self):
         self.roll_strike()
         self.game.roll(5)
         self.game.roll(5)
         self.roll_many(0, 16)
-        self.assertEqual(30, self.game.roll_score())
+        self.assertEqual(self.game.roll_score(), 30)
 
-    def test_perfectscoregame(self):
+    def test_PerfectScoreGame(self):
         self.roll_many(10, 12)
-        self.assertEquals(300, self.game.roll_score())
+        self.assertEquals(self.game.roll_score(), 300)
 
 
     def roll_many(self, pins, num):
